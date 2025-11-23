@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,7 +23,11 @@ public class Venta {
 
     private LocalDate fecha;
     private String estado;
+    private Double total;
 
     @ManyToOne
     private Sucursal sucursal;
+
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<DetalleVenta> detalleVentas = new ArrayList<>();
 }
